@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "1096533040025",
+    "project_id": "alphav2-59e2f",
+    "storage_bucket": "alphav2-59e2f.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:1096533040025:android:cb43c061e1ea5811dbd108",
+        "android_client_info": {
+          "package_name": "com.example.alphav2"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "1096533040025-f04b3iilahku5dhatbhmui3on8f4eb7s.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCGw71aMnapnRMAPicXBmd26GVZ1wShzWU"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "1096533040025-f04b3iilahku5dhatbhmui3on8f4eb7s.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
