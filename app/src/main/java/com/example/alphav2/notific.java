@@ -1,6 +1,6 @@
 package com.example.alphav2;
 
-import static com.example.alphav2.help.CHANNEL_1_ID;
+import static com.example.alphav2.help.CHANNEL_ID;
 
 import android.app.Notification;
 import android.content.Intent;
@@ -9,9 +9,9 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.EditText;
+
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.app.NotificationCompat;
-
 import androidx.core.app.NotificationManagerCompat;
 
 public class notific extends AppCompatActivity {
@@ -36,11 +36,13 @@ public class notific extends AppCompatActivity {
     public void Notification(View view) {
         String title = "NOTIFICATION";
         String mess = notiText.getText().toString();
+        notiText.setText("");
 
-        Notification n = new NotificationCompat.Builder(this, CHANNEL_1_ID)
+        Notification n = new NotificationCompat.Builder(this, CHANNEL_ID)
 
                 .setContentTitle(title)
                 .setContentText(mess)
+                .setSmallIcon(R.drawable.icon)
                 .setPriority(NotificationCompat.PRIORITY_LOW)
                 .build();
 
