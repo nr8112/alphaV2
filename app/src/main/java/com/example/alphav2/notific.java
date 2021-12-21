@@ -37,13 +37,13 @@ public class notific extends AppCompatActivity {
         String title = "NOTIFICATION";
         String mess = notiText.getText().toString();
         notiText.setText("");
-
+//create notification
         Notification n = new NotificationCompat.Builder(this, CHANNEL_ID)
 
                 .setContentTitle(title)
                 .setContentText(mess)
                 .setSmallIcon(R.drawable.icon)
-                .setPriority(NotificationCompat.PRIORITY_LOW)
+                .setPriority(NotificationCompat.PRIORITY_LOW) //importens
                 .build();
 
         nManager.notify(1, n);
@@ -75,6 +75,10 @@ public class notific extends AppCompatActivity {
         }
         else if (st.endsWith("sg up")) {
             Intent si = new Intent(this, MainActivity.class);
+            startActivity(si);
+        }
+        else if (st.endsWith("image")) {
+            Intent si = new Intent(this, image.class);
             startActivity(si);
         }
         return true;

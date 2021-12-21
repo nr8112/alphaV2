@@ -1,8 +1,5 @@
 package com.example.alphav2;
 
-import androidx.annotation.NonNull;
-import androidx.appcompat.app.AppCompatActivity;
-
 import android.content.Intent;
 import android.os.Bundle;
 import android.text.TextUtils;
@@ -10,9 +7,11 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.EditText;
-import android.widget.Switch;
 import android.widget.TextView;
 import android.widget.Toast;
+
+import androidx.annotation.NonNull;
+import androidx.appcompat.app.AppCompatActivity;
 
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
@@ -103,6 +102,11 @@ public class MainActivity extends AppCompatActivity {
             Intent si = new Intent(this, MainActivity.class);
             startActivity(si);
     }
+        else if (st.endsWith("image")) {
+            Intent si = new Intent(this, image.class);
+            startActivity(si);
+        }
+
          return true;
 }
 
