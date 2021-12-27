@@ -12,11 +12,14 @@ import android.view.View;
 import android.widget.ImageView;
 import android.widget.Toast;
 
+import androidx.annotation.NonNull;
 import androidx.appcompat.app.ActionBar;
 import androidx.appcompat.app.AppCompatActivity;
 
+import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.firebase.storage.FirebaseStorage;
+import com.google.firebase.storage.OnProgressListener;
 import com.google.firebase.storage.StorageReference;
 import com.google.firebase.storage.UploadTask;
 
@@ -24,8 +27,8 @@ import java.util.UUID;
 
 public class image extends AppCompatActivity {
 
-   ImageView iv;
-   Uri filePath;
+    ImageView iv;
+    Uri filePath;
 
     // request code
     private final int PICK_IMAGE_REQUEST = 22;
@@ -33,7 +36,6 @@ public class image extends AppCompatActivity {
     // firebase storage and StorageReference
     FirebaseStorage storage;
     StorageReference storageReference;
-
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -46,7 +48,6 @@ public class image extends AppCompatActivity {
                 Color.parseColor("#0F9D58"));
         actionBar.setBackgroundDrawable(colorDrawable);
 
-
         iv = findViewById(R.id.imageview);
 
         // get the Firebase  storage reference
@@ -55,49 +56,58 @@ public class image extends AppCompatActivity {
     }
 
 
+    public void get_pic(View view) {
+        Intent intent = new Intent();
+        intent.setType("image/*");
+        intent.setAction(Intent.ACTION_GET_CONTENT);
+        startActivityForResult(Intent.createChooser(intent, "Select Image from here..."),PICK_IMAGE_REQUEST);
+    }
+
+
+
+
     public void upload_pic(View view) {
         if (filePath != null) {
 
-            // no image
+            // Code for showing progressDialog while uploading
             ProgressDialog progressDialog = new ProgressDialog(this);
-            progressDialog.setTitle("no image upload....");
+            progressDialog.setTitle("Uploading...");
             progressDialog.show();
 
-            // create child of storageReference
+            // Defining the child of storageReference
             StorageReference ref = storageReference.child("images/" + UUID.randomUUID().toString());
 
-            //  failure
             ref.putFile(filePath).addOnSuccessListener(new OnSuccessListener<UploadTask.TaskSnapshot>() {
                 @Override
-                public void onSuccess(// Image uploaded successfully
-                        UploadTask.TaskSnapshot taskSnapshot) {
-                    progressDialog.dismiss();
-                    Toast.makeText(image.this, "Image Uploaded!!", Toast.LENGTH_SHORT).show();
-                                }
-                            })
-
-
-
-                    .addOnFailureListener(new OnFailureListener() {
-                        @Override
-                        public void onFailure(@NonNull Exception e)
-                        {
-
-                            // Error, Image not uploaded
-                            progressDialog.dismiss();
-                            Toast
-                                    .makeText(MainActivity.this,
-                                            "Failed " + e.getMessage(),
-                                            Toast.LENGTH_SHORT)
-                                    .show();
-                        }
-                    })
+                public void onSuccess(UploadTask.TaskSnapshot taskSnapshot) {
+                    progressDialog.dismiss();Toast.makeText(image.this, "Image Uploaded!!", Toast.LENGTH_SHORT).show();
+                }}).addOnFailureListener(new OnFailureListener() {@Override public void onFailure(@NonNull Exception e)
+            {
+                progressDialog.dismiss();Toast.makeText(image.this, "Failed " + e.getMessage(), Toast.LENGTH_SHORT).show();
+            }
+            })
                     .addOnProgressListener(
                             new OnProgressListener<UploadTask.TaskSnapshot>() {
 
                                 // Progress Listener for loading
                                 // percentage on the dialog box
                                 @Override
+                                public void onProgress(
+                                        UploadTask.TaskSnapshot taskSnapshot)
+                                {
+                                    double progress
+                                            = (100.0
+                                            * taskSnapshot.getBytesTransferred()
+                                            / taskSnapshot.getTotalByteCount());
+                                    progressDialog.setMessage(
+                                            "Uploaded "
+                                                    + (int)progress + "%");
+                                }
+                            });
+        }
+
+    }
+
 
     public boolean onCreateOptionsMenu(Menu menu) {
         getMenuInflater().inflate(R.menu.main, menu);
@@ -134,4 +144,3 @@ public class image extends AppCompatActivity {
 
 
 }
-
