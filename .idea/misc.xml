@@ -3,10 +3,13 @@
   <component name="DesignSurface">
     <option name="filePathToZoomLevelMap">
       <map>
+        <entry key="..\:/NoaAndroidProjects/alphaV2/app/src/main/res/layout/activity_alarm.xml" value="0.3390625" />
+        <entry key="..\:/NoaAndroidProjects/alphaV2/app/src/main/res/layout/activity_help_scan.xml" value="0.25" />
         <entry key="..\:/NoaAndroidProjects/alphaV2/app/src/main/res/layout/activity_image.xml" value="0.3546875" />
         <entry key="..\:/NoaAndroidProjects/alphaV2/app/src/main/res/layout/activity_info.xml" value="0.2796875" />
         <entry key="..\:/NoaAndroidProjects/alphaV2/app/src/main/res/layout/activity_main.xml" value="0.25" />
         <entry key="..\:/NoaAndroidProjects/alphaV2/app/src/main/res/layout/activity_notific.xml" value="0.20606884057971014" />
+        <entry key="..\:/NoaAndroidProjects/alphaV2/app/src/main/res/layout/activity_qr.xml" value="0.3120471014492754" />
         <entry key="..\:/NoaAndroidProjects/alphaV2/app/src/main/res/menu/main.xml" value="0.3546875" />
       </map>
     </option>

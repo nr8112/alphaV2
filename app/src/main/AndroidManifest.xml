@@ -2,6 +2,8 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="com.example.alphav2">
 
+    <uses-permission android:name="android.permission.CAMERA" />
+
     <application
         android:name=".help"
         android:allowBackup="true"
@@ -11,6 +13,15 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.AlphaV2"
         android:usesCleartextTraffic="true">
+        <activity
+            android:name=".helpSCAN"
+            android:exported="false" />
+        <activity
+            android:name=".qr"
+            android:exported="false" />
+        <activity
+            android:name=".alarm"
+            android:exported="false" />
         <activity
             android:name=".image"
             android:exported="false" />

@@ -106,6 +106,14 @@ public class MainActivity extends AppCompatActivity {
             Intent si = new Intent(this, image.class);
             startActivity(si);
         }
+        else if (st.endsWith("alarm")) {
+            Intent si = new Intent(this, alarm.class);
+            startActivity(si);
+        }
+        else if (st.endsWith("qr")) {
+            Intent si = new Intent(this, qr.class);
+            startActivity(si);
+        }
 
          return true;
 }

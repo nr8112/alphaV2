@@ -2,8 +2,10 @@ package com.example.alphav2;
 
 import android.app.ProgressDialog;
 import android.content.Intent;
+import android.graphics.Bitmap;
 import android.net.Uri;
 import android.os.Bundle;
+import android.provider.MediaStore;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
@@ -20,6 +22,7 @@ import com.google.firebase.storage.OnProgressListener;
 import com.google.firebase.storage.StorageReference;
 import com.google.firebase.storage.UploadTask;
 
+import java.io.IOException;
 import java.util.UUID;
 
 public class image extends AppCompatActivity {
@@ -38,7 +41,6 @@ public class image extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_image);
-
         iv = findViewById(R.id.imageview);
 
         // get the Firebase  storage reference
@@ -52,9 +54,31 @@ public class image extends AppCompatActivity {
         intent.setType("image/*");
         intent.setAction(Intent.ACTION_GET_CONTENT);
         startActivityForResult(Intent.createChooser(intent, "Select Image from here..."),PICK_IMAGE_REQUEST);
+
     }
 
+    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
 
+        super.onActivityResult(requestCode, resultCode, data);
+
+        // checking request code and result code if request code is PICK_IMAGE_REQUEST and resultCode is RESULT_OK then set image in the image view
+        if (requestCode == PICK_IMAGE_REQUEST && resultCode == RESULT_OK && data != null && data.getData() != null) {
+            filePath = data.getData();
+            try {
+
+                Bitmap bitmap = MediaStore // Setting image on image view using Bitmap
+                        .Images
+                        .Media
+                        .getBitmap(
+                                getContentResolver(),
+                                filePath);
+                iv.setImageBitmap(bitmap);
+            }
+            catch (IOException e) {
+                e.printStackTrace();
+            }
+        }
+    }
 
 
     public void upload_pic(View view) {
@@ -127,6 +151,10 @@ public class image extends AppCompatActivity {
         }
         else if (st.endsWith("image")) {
             Intent si = new Intent(this, image.class);
+            startActivity(si);
+        }
+        else if (st.endsWith("qr")) {
+            Intent si = new Intent(this, qr.class);
             startActivity(si);
         }
 
